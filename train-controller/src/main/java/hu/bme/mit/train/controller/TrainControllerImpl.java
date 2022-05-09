@@ -1,12 +1,15 @@
 package hu.bme.mit.train.controller;
 
 import hu.bme.mit.train.interfaces.TrainController;
+import java.lang.Thread;
+
 
 public class TrainControllerImpl implements TrainController, Runable {
 
 	private int step = 0;
 	private int referenceSpeed = 0;
 	private int speedLimit = 0;
+
 	private Thread thread = new Thread();
 
 	public TrainSpeed(){
@@ -18,6 +21,17 @@ public class TrainControllerImpl implements TrainController, Runable {
 		Thread.sleep(1000);
 	}
 
+	public TrainControllerImpl()
+	{
+		th = new Thread(this);
+		th.start(); 	
+	}	
+
+	public void run()
+	{	followSpeed(); 
+		th.sleep(1000);
+
+	}
 	@Override
 	public void followSpeed() {
 		if (referenceSpeed < 0) {
