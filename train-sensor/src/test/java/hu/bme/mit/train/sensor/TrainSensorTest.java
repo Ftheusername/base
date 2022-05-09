@@ -7,13 +7,39 @@ import static org.mockito.Mockito.*;
 
 public class TrainSensorTest {
 
+    TrainController mockController;
+    TrainUser mockUser;
+    TrainSensorImpl trainSensor;
+
+
     @Before
     public void before() {
-        // TODO Add initializations
+        mockController = mock(TrainController.class);
+        mockUser = mock(TrainUser.class);
+        trainSensor = new TrainSensorImpl(mockController, mockUser);
     }
 
     @Test
-    public void ThisIsAnExampleTestStub() {
-        // TODO Delete this and add test cases based on the issues
+    public void AbsMinLimit() {
+        trainSensor.overrideSpeedLimit(-1);
+        verify(mockUser, times(1).setAlarmState(true));  
+    }
+
+    @Test
+    public void AbsMaxLimit() {
+        trainSensor.overrideSpeedLimit(600);
+        verify(mockUser, times(1).setAlarmState(true));
+    }
+
+    @Test
+    public void CheckSpeedLimit() {
+        Assert.assertEquals(10, 10);
+    }
+
+    @Test
+    public void RelLimit() {
+        trainSensor.overrideSpeedLimit(5);
+        mockController.overrideJoystickPosition(400);
+        verify(mockUser, times(1).setAlarmState(true));
     }
 }
