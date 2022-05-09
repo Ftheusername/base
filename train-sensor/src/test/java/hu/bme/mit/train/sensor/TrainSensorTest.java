@@ -4,6 +4,10 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import static org.mockito.Mockito.*;
+import hu.bme.mit.train.interfaces.TrainController;
+import hu.bme.mit.train.interfaces.TrainSensor;
+import hu.bme.mit.train.interfaces.TrainUser;
+
 
 public class TrainSensorTest {
 
@@ -22,13 +26,13 @@ public class TrainSensorTest {
     @Test
     public void AbsMinLimit() {
         trainSensor.overrideSpeedLimit(-1);
-        verify(mockUser, times(1).setAlarmState(true));  
+        verify(mockUser, times(1)).setAlarmState(true);  
     }
 
     @Test
     public void AbsMaxLimit() {
         trainSensor.overrideSpeedLimit(600);
-        verify(mockUser, times(1).setAlarmState(true));
+        verify(mockUser, times(1)).setAlarmState(true);
     }
 
     @Test
@@ -39,7 +43,7 @@ public class TrainSensorTest {
     @Test
     public void RelLimit() {
         trainSensor.overrideSpeedLimit(5);
-        mockController.overrideJoystickPosition(400);
-        verify(mockUser, times(1).setAlarmState(true));
+        mockController.setJoystickPosition(400);
+        verify(mockUser, times(1)).setAlarmState(true);
     }
 }
