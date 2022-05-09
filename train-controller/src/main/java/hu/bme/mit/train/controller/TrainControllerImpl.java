@@ -10,7 +10,7 @@ public class TrainControllerImpl implements TrainController,Runable {
 	private int speedLimit = 0;
 	private Thread th; 
 
-	public TrainControllerImpl()
+	public void TrainControllerImpl()
 	{
 		th = new Thread(this);
 		th.start(); 	
