@@ -19,7 +19,14 @@ public class TrainControllerImpl implements TrainController, Runnable {
 	public void run()
 	{	
 		followSpeed(); 
-		th.sleep(1000);
+
+		try
+		{
+			th.sleep(1000);
+		} catch (Exception e) {
+			System.out.println("nem aludt el a szál");
+		} 
+		
 	}
 
 	@Override
