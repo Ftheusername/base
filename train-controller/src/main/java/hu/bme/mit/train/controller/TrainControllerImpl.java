@@ -3,12 +3,23 @@ package hu.bme.mit.train.controller;
 import hu.bme.mit.train.interfaces.TrainController;
 import java.lang.Thread;
 
-public class TrainControllerImpl implements TrainController,Runable {
+
+public class TrainControllerImpl implements TrainController, Runable {
 
 	private int step = 0;
 	private int referenceSpeed = 0;
 	private int speedLimit = 0;
-	private Thread th; 
+
+	private Thread thread = new Thread();
+
+	public TrainSpeed(){
+		thread.start();
+	} 
+
+	public void run() {
+		followSpeed();
+		Thread.sleep(1000);
+	}
 
 	public void TrainControllerImpl()
 	{
